@@ -1,0 +1,34 @@
+### Get all persons
+GET http://localhost:3001/api/persons
+
+### Get single person
+GET http://localhost:3001/api/persons/1
+
+### DELETE
+DELETE http://localhost:3001/api/persons/3
+
+### POST
+POST http://localhost:3001/api/persons/
+Content-Type: application/json
+
+{
+    "name": "Brandon Lee",
+    "number": "39-32-339"
+}
+
+### Repeat prev POST to get error
+POST http://localhost:3001/api/persons/
+Content-Type: application/json
+
+{
+    "name": "Brandon Lee",
+    "number": "39-32-339"
+}
+
+### POST missing param
+POST http://localhost:3001/api/persons/
+Content-Type: application/json
+
+{
+    "name": "Brandon Lee"
+}
