@@ -1,6 +1,13 @@
 const express = require('express')
+const morgan = require('morgan')
+
+
 const app = express()
 app.use(express.json())
+
+// step 8
+morgan.token('body', (request, response) => JSON.stringify(request.body))
+app.use(morgan(':method :url :status :req[content-length] - :response-time ms :body'))
 
 let persons = [
     { 
@@ -32,7 +39,7 @@ app.get('/api/persons', (request, response) => {
 
 // step 2
 app.get('/info', (request, response) => {
-    response.send('<div><p>Phonebook has info for '+persons.length+' people</p><p>'+new Date().toString() +'</p></div>')
+    response.send(`<div><p>Phonebook has info for ${persons.length} people</p><p> ${new Date().toString()}</p></div>`)
 })
 
 // step 3
