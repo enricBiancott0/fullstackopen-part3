@@ -21,7 +21,7 @@ if (process.argv.length > 3) {
   const personName = process.argv[3]
   const personNumber = process.argv[4]
   
-  console.log("trying to connect to MongoDb")
+  console.log('trying to connect to MongoDb')
   mongoose
     .connect(url)
     .then((result) => {
@@ -40,7 +40,7 @@ if (process.argv.length > 3) {
     })
     .catch((err) => console.log(err))
 } else {
-  console.log("trying to connect to MongoDb")
+  console.log('trying to connect to MongoDb')
   mongoose
     .connect(url)
     .then((result) => {
@@ -48,7 +48,7 @@ if (process.argv.length > 3) {
       
       Person.find({}).then(persons => {
         persons.forEach(person => {
-          console.log(person.name, " ", person.number)
+          console.log(person.name, ' ', person.number)
         })
         mongoose.connection.close()
       })
