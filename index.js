@@ -1,7 +1,9 @@
 require('dotenv').config()
+
 const express = require('express')
 const cors = require('cors')
 const morgan = require('morgan')
+
 const Person = require('./models/person')
 
 const app = express()
@@ -9,10 +11,10 @@ app.use(express.json())
 app.use (cors())
 app.use(express.static('build'))
 
-morgan.token('body', (request, response) => JSON.stringify(request.body))
+morgan.token('body', (request) => JSON.stringify(request.body))
 app.use(morgan(':method :url :status :req[content-length] - :response-time ms :body'))
 
-app.get('/info', (request, response) => {
+app.get('/info', (request, response, next) => {
   Person
     .count({})
     .then(count => {
@@ -43,7 +45,7 @@ app.get('/api/persons/:id', (request, response, next) => {
 app.delete('/api/persons/:id', (request, response, next) => {
   Person
     .findByIdAndRemove(request.params.id)
-    .then(result => {
+    .then(() => {
       response.status(204).end()
     })
     .catch(error => next(error))
