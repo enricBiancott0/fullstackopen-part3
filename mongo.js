@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 
 if (process.argv.length < 2 || process.argv.length > 5) {
-    console.log('Please provide the password as an argument: node mongo.js <password> <name> <number>')
-    process.exit(1)
+  console.log('Please provide the password as an argument: node mongo.js <password> <name> <number>')
+  process.exit(1)
 }
 
 const mongoPwd = process.argv[2]
@@ -18,40 +18,40 @@ const Person = mongoose.model('Person', personSchema)
 
 // Generate new person
 if (process.argv.length > 3) {
-    const personName = process.argv[3]
-    const personNumber = process.argv[4]
-    
-    console.log("trying to connect to MongoDb")
-    mongoose
+  const personName = process.argv[3]
+  const personNumber = process.argv[4]
+  
+  console.log("trying to connect to MongoDb")
+  mongoose
     .connect(url)
     .then((result) => {
-        console.log('Connected')
+      console.log('Connected')
 
-        const person = new Person({
-            name: personName,
-            number: personNumber
-        })
+      const person = new Person({
+        name: personName,
+        number: personNumber
+      })
 
-        return person.save()
+      return person.save()
     })
     .then(() => {
-        console.log(`Added ${personName} ${personNumber} to phonebook`)
-        return mongoose.connection.close()
+      console.log(`Added ${personName} ${personNumber} to phonebook`)
+      return mongoose.connection.close()
     })
     .catch((err) => console.log(err))
 } else {
-    console.log("trying to connect to MongoDb")
-    mongoose
+  console.log("trying to connect to MongoDb")
+  mongoose
     .connect(url)
     .then((result) => {
-        console.log('Connected\nphonebook')
-        
-        Person.find({}).then(persons => {
-            persons.forEach(person => {
-                console.log(person.name, " ", person.number)
-            })
-            mongoose.connection.close()
+      console.log('Connected\nphonebook')
+      
+      Person.find({}).then(persons => {
+        persons.forEach(person => {
+          console.log(person.name, " ", person.number)
         })
+        mongoose.connection.close()
+      })
     })
     .catch((err) => console.log(err))
 }

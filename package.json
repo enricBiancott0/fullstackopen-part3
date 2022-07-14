@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/enricBiancott0/fullstackopen-part3#readme",
   "devDependencies": {
+    "eslint": "^8.19.0",
     "nodemon": "^2.0.19"
   },
   "dependencies": {
